@@ -9,6 +9,7 @@
 //  concerns and following the MVC (model view controller) design pattern.
 
 const User = require("../models/user-model");
+const brcrypt = require("bcryptjs");
 
 // controller for home page
 const home = async (req, res) => {
@@ -39,11 +40,15 @@ const register = async (req, res) => {
       return res.status(400).json({ msg: "user already exists" });
     }
 
+    // hash the password
+    const saltRound = 10;
+    const hash_password = await brcrypt.hash(password, saltRound);
+
     const userCreated = await User.create({
       username,
       email,
       phone,
-      password,
+      password: hash_password,
     });
     res.status(200).json({ msg: userCreated });
   } catch (error) {
