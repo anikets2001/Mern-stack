@@ -24,12 +24,13 @@ const userSchema = new mongoose.Schema({
     },
 })
 
-// securing password
+// securing password with bcryptjs
 userSchema.pre('save', async function(next){
     const user = this;
+    console.log(this);
 
     if(!user.isModified('password')){
-        next()
+        next();
     }
 
     try {
