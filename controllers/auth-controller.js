@@ -51,6 +51,7 @@ const register = async (req, res) => {
       phone,
       password,
     });
+    
     res.status(201).json({ msg: userCreated });
   } catch (error) {
     res.status(500).send({ msg: "internal server error" });
