@@ -18,4 +18,8 @@ router.route("/").get(authcontrollers.home);
 // for registration page
 router.route("/register").post(authcontrollers.register);
 
+//for login page
+router.route("/login").post(authcontrollers.login);
+
+
 module.exports = router;

@@ -43,6 +43,11 @@ userSchema.pre('save', async function(next){
     }
 })
 
+//compare password for login
+userSchema.methods.comparePassword = async function(password){
+    return  bcrypt.compare(password, this.password)
+}
+
 // What is JWT? (JSON WEB TOKEN)
 /*--- 
     JSON web token is an open standard (RFC 7519) tht defines a compact and self-contained
