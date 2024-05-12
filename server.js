@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const router = require("./router/auth-router");
 const connectDb = require("./utils/db");
+const errorMiddleWare = require('./middlewares/error-middleware');
 
 app.use(express.json());
 // This line of code adds Express middleware that parses incoming
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use("/api/auth", router);
 //Mount the Router: To use the router in your main Express app, you can "mount"
 // it at a specific URL prefix
+
+app.use(errorMiddleWare)
 
 const PORT = 5000;
 connectDb().then(() => {
