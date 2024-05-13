@@ -1,9 +1,10 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const app = express();
-const router = require("./router/auth-router");
+const authRoute = require("./router/auth-router");
+const contactRoute = require("./router/contact-router");
 const connectDb = require("./utils/db");
-const errorMiddleWare = require('./middlewares/error-middleware');
+const errorMiddleWare = require("./middlewares/error-middleware");
 
 app.use(express.json());
 // This line of code adds Express middleware that parses incoming
@@ -13,11 +14,13 @@ app.use(express.json());
 // applies at the beginning of your middleware stack to ensure it's available
 // fo rall subsequent route handlers.
 
-app.use("/api/auth", router);
+app.use("/api/auth", authRoute);
 //Mount the Router: To use the router in your main Express app, you can "mount"
 // it at a specific URL prefix
 
-app.use(errorMiddleWare)
+app.use("/api/form", contactRoute);
+
+app.use(errorMiddleWare);
 
 const PORT = 5000;
 connectDb().then(() => {
